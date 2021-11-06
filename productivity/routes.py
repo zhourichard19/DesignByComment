@@ -1,9 +1,11 @@
-from productivity import app, db
-from flask import render_template, Response, redirect, url_for, flash
+from productivity import app, db, url_timestamp, url_viewtime, prev_url
+from flask import render_template, Response, redirect, url_for, flash, jsonify, request
 from productivity.cam import camera, gen_frames
 from productivity.forms import RegisterForm, LoginForm
 from productivity.models import User
+from productivity.url_parse import url_strip
 from flask_login import login_user, logout_user, login_required, current_user
+import time
 
 @app.route('/')
 @app.route('/home')
@@ -52,3 +54,40 @@ def logout_page():
     logout_user()
     flash('You have been logged out!')
     return redirect(url_for('home_page'))
+
+@app.route('/send_url', methods=['POST'])
+def send_url():
+    resp_json = request.get_data()
+    params = resp_json.decode()
+    url = params.replace("url=", "")
+    print("currently viewing: " + url_strip(url))
+    parent_url = url_strip(url)
+
+    global url_timestamp
+    global url_viewtime
+    global prev_url
+
+    print("initial db prev tab: ", prev_url)
+    print("initial db timestamp: ", url_timestamp)
+    print("initial db viewtime: ", url_viewtime)
+
+    if parent_url not in url_timestamp.keys():
+        url_viewtime[parent_url] = 0
+
+    if prev_url != '':
+        time_spent = int(time.time() - url_timestamp[prev_url])
+        url_viewtime[prev_url] = url_viewtime[prev_url] + time_spent
+
+    x = int(time.time())
+    url_timestamp[parent_url] = x
+    prev_url = parent_url
+    print("final timestamps: ", url_timestamp)
+    print("final viewtimes: ", url_viewtime)
+
+    return jsonify({'message': 'success!'}), 200
+
+@app.route('/quit_url', methods=['POST'])
+def quit_url():
+    resp_json = request.get_data()
+    print("Url closed: " + resp_json.decode())
+    return jsonify({'message': 'quit success!'}), 200
