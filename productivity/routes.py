@@ -91,3 +91,20 @@ def quit_url():
     resp_json = request.get_data()
     print("Url closed: " + resp_json.decode())
     return jsonify({'message': 'quit success!'}), 200
+
+@app.route('/start')
+def start_page():
+    url_timestamp = {}
+    url_viewtime = {}
+    prev_url = ""
+    return redirect(url_for('home_page'))
+
+@app.route('/end')
+def end_page():
+    
+    return redirect(url_for('home_page'))
+
+
+@app.route('/tables')
+def tables_page():
+    return url_viewtime #render_template('login.html', url_viewtime=url_viewtime)

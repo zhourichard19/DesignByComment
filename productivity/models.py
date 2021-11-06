@@ -21,3 +21,11 @@ class User(db.Model, UserMixin):
 
     def check_password_correction(self, attempted_password): 
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
+
+class Session(db.Model):
+    session_id = db.Column(db.Integer(), primary_key=True)
+    date = db.Column(db.DateTime(), nullable=False)
+
+class SessionRecord(db.Model):
+    session_id = db.Column(db.Integer(), primary_key=True)
+    
