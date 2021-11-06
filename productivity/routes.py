@@ -105,6 +105,7 @@ def end_page():
     return redirect(url_for('home_page'))
 
 
-@app.route('/tables')
+@app.route('/Tables')
 def tables_page():
-    return url_viewtime #render_template('login.html', url_viewtime=url_viewtime)
+    dic = {'url':6,'google.com':156,'gmail.com':2}
+    return render_template('Tables.html',url_viewtime=url_viewtime)
