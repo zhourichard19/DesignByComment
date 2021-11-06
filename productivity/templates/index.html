@@ -77,13 +77,9 @@
 </style>
 
 <body>
-    <!--<div id ="app" v-cloak >
-        <hr />
-        <button @click="toggleBox">Show Cam</button>
-            <div v-if="isVisable" class="invis"></div>
-    </div>    -->
-    <!--<div class= "mydivheader" id="container" style="width: 100%; height: 100%"></div>-->
     
+    <!--<div class= "mydivheader" id="container" style="width: 100%; height: 100%"></div>-->
+   
     
     <div id="mydiv" class="container">
         
@@ -91,16 +87,28 @@
             <div id="mydivheader" class="col-lg-8  offset-lg-2">
                 <h3 class="mt-5" style="color:red">ARE YOU STAYING ON TASK?!?!?!?</h3>
                 <img class="invis" src="{{ url_for('video_feed') }}" width="100%">
-                <button id="buttonShift"><a href="{{ url_for('start_page') }}">Start</a></button>
+                <button onClick="myTimer = setInterval(myCounter, 1000)" id="buttonShift"><a href="{{ url_for('start_page') }}">Start</a></button>
                 <button id="buttonShift"><a href="{{ url_for('logout_page') }}">Stop</a></button>
+                <p id="counter"></p>
+                <div id ="app" v-cloak >
+                    <hr />
+                    <button @click="toggleBox">Show Cam</button>
+                    <div v-if="isVisable" class="invis"></div>
+                </div> 
             </div>
         </div>
     </div>
+    <invisible/>
 
 
 
 
     <script>
+        var count = 0;
+        function myCounter() {
+            document.getElementById("counter").innerHTML = ++c;
+        }
+
         //Make the DIV element draggagle:
         dragElement(document.getElementById("mydiv"));
 
@@ -159,10 +167,43 @@
             methods: {
                 toggleBox() {
                     this.isVisable = !this.isVisable
+                    console.log("WE GOOD");
                 }
 
             }
         })
+        app.component('invisible',{//Component example
+                template:`
+                <div id="mydiv" class="container">
+        
+        <div class="row" id="mydivheader">
+            <div id="mydivheader" class="col-lg-8  offset-lg-2">
+                <h3 class="mt-5" style="color:red">ARE YOU STAYING ON TASK?!?!?!?</h3>
+                <img class="invis" src="{{ url_for('video_feed') }}" width="100%">
+                <button id="buttonShift"><a href="{{ url_for('start_page') }}">Start</a></button>
+                <button id="buttonShift"><a href="{{ url_for('logout_page') }}">Stop</a></button>
+                <div id ="app" v-cloak >
+                    <hr />
+                    <button @click="toggleBox">Show Cam</button>
+                    <div v-if="isVisable" class="invis"></div>
+                </div> 
+            </div>
+        </div>
+    </div>
+                `,
+                data(){
+                    return{
+                        isVisable: false
+                    }
+                },
+                methods:{
+                    toggleBox() {
+                        this.isVisable = !this.isVisable
+                        console.log("WE GOOD");
+                    }
+                }
+
+            })
 
 
 
