@@ -55,7 +55,15 @@
         width: 200px;
     }
 
+    #buttonShift {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
 
+        color: #fff;
+        
+        overflow: auto;
+    }
 
     #mydivheader {
         padding: 10px;
@@ -75,14 +83,16 @@
             <div v-if="isVisable" class="invis"></div>
     </div>    -->
     <!--<div class= "mydivheader" id="container" style="width: 100%; height: 100%"></div>-->
-    <!--<button><a href="{{ url_for('start_page') }}">Stop</a></button>
-    <button><a href="{{ url_for('logout_page') }}">Stop</a></button>-->
+    
     
     <div id="mydiv" class="container">
+        
         <div class="row" id="mydivheader">
             <div id="mydivheader" class="col-lg-8  offset-lg-2">
-                <h3 class="mt-5">Live Streaming</h3>
+                <h3 class="mt-5" style="color:red">ARE YOU STAYING ON TASK?!?!?!?</h3>
                 <img class="invis" src="{{ url_for('video_feed') }}" width="100%">
+                <button id="buttonShift"><a href="{{ url_for('start_page') }}">Start</a></button>
+                <button id="buttonShift"><a href="{{ url_for('logout_page') }}">Stop</a></button>
             </div>
         </div>
     </div>
