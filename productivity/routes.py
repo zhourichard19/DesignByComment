@@ -1,8 +1,6 @@
 from productivity import app
 from flask import render_template, Response
-import cv2
-
-camera = cv2.VideoCapture(0)
+from productivity.cam import camera, gen_frames
 
 @app.route('/')
 @app.route('/home')
@@ -12,15 +10,3 @@ def home_page():
 @app.route('/video_feed')
 def video_feed():
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
-def gen_frames():  
-    while True:
-        success, frame = camera.read()  # read the camera frame
-        if not success:
-            break
-        else:
-            ret, buffer = cv2.imencode('.jpg', frame)
-            frame = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
