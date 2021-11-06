@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <style>
+
+body {
+  background-color: #fff;
+}
+
 .topnav {
   background-color: #333;
   overflow: hidden;
@@ -27,19 +32,17 @@
 }
 
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #366df7;
   color: white;
 }
 
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #fff;
   padding: 20px 10px;
 }
 
-/* Style the header links */
 .header a {
-  float: left;
   color: black;
   text-align: center;
   padding: 12px;
@@ -68,28 +71,35 @@
   float: right;
 }
 
-@media screen and (max-width: 500px) {
-  .header a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .header-right {
-    float: none;
-  }
+table{
+    border-collapse: collapse;
 }
+
+th, td {
+  border: 1px solid black;
+}
+
 </style>
 <body>
-    <div class="header">
+  <div class="header">
     <a href="{{ url_for('home_page') }}" class="logo">Distraction Detecter</a>
   </div>
-
-    <div class="topnav">
-        <a href="{{ url_for('home_page') }}">Cam</a>
-        <a class="active" href="{{ url_for('tables_page') }}">Tables</a>
+  
+  <div class="topnav">
+        <a style = "float: left;" class="active" href="{{ url_for('home_page') }}">Cam</a>
+        <a style = "float: left;" href="{{ url_for('tables_page') }}">Tables</a>
+        {% if current_user.is_authenticated %}
+            <a style = "float: right;" class="nav-link">Welcome, {{ current_user.username }}</a>
+            <a style = "float: right;"class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
+        {% else %}
+            <a style = "float: right;"class="nav-link" href="{{ url_for('login_page') }}">Login</a>
+            <a style = "float: right;"class="nav-link" href="{{ url_for('register_page') }}">Register</a>
+        {% endif %}
     </div>
 
     <table>
+        <th> Website </th>
+        <th> Seconds </th>
         {% for key, value in url_viewtime.items() %}
             <tr>
                 <th> {{ key }} </th>

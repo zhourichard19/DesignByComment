@@ -5,8 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <style>
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  resize: both;
+  overflow: auto;
+  border: 1px solid #d3d3d3;
+}
+.box {
+  background-color: black;
+  border-style: solide;
+  height: 200px;
+  width: 200px;
+}
+
+
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  
+  color: #fff;
+  resize: both;
+  overflow: auto;
+}
+
+body {
+  background-color: #fff;
+}
+
 .topnav {
   background-color: #333;
   overflow: hidden;
@@ -27,45 +60,17 @@
 }
 
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #366df7;
   color: white;
 }
 
-    #mydiv {
-      position: absolute;
-      z-index: 9;
-      background-color: #f1f1f1;
-      text-align: center;
-      resize: both;
-      overflow: auto;
-      border: 1px solid #d3d3d3;
-    }
-    .box {
-            background-color: coral;
-            height: 200px;
-            width: 200px;
-    }
-
-    
-
-    #mydivheader {
-      padding: 10px;
-      cursor: move;
-      z-index: 10;
-      
-      color: #fff;
-      resize: both;
-      overflow: auto;
-    }
-
-    .header {
+.header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #fff;
   padding: 20px 10px;
 }
 
 .header a {
-  float: left;
   color: black;
   text-align: center;
   padding: 12px;
@@ -85,38 +90,32 @@
   color: black;
 }
 
-/* Style the active/current link*/
 .header a.active {
   background-color: dodgerblue;
   color: white;
 }
 
-/* Float the link section to the right */
 .header-right {
   float: right;
 }
 
-@media screen and (max-width: 500px) {
-  .header a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .header-right {
-    float: none;
-  }
-}
 </style>
-
 <body>
   <div class="header">
     <a href="{{ url_for('home_page') }}" class="logo">Distraction Detecter</a>
   </div>
   
   <div class="topnav">
-    <a class="active" href="#home">Cam</a>
-    <a href="{{ url_for('tables_page') }}">Tables</a>
-  </div>
+        <a style = "float: left;" class="active" href="{{ url_for('home_page') }}">Cam</a>
+        <a style = "float: left;" href="{{ url_for('tables_page') }}">Tables</a>
+        {% if current_user.is_authenticated %}
+            <a style = "float: right;" class="nav-link">Welcome, {{ current_user.username }}</a>
+            <a style = "float: right;"class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
+        {% else %}
+            <a style = "float: right;"class="nav-link" href="{{ url_for('login_page') }}">Login</a>
+            <a style = "float: right;"class="nav-link" href="{{ url_for('register_page') }}">Register</a>
+        {% endif %}
+    </div>
 
     <!--<div id ="app" v-cloak >
         <hr />
