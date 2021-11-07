@@ -13,7 +13,7 @@
     <a href="{{ url_for('home_page') }}" class="logo">Distraction Detecter</a>
   </div>
   
-  <div class="topnav">
+    <div class="topnav">
         <a style = "float: left;" href="{{ url_for('home_page') }}">Cam</a>
         <a style = "float: left;" href="{{ url_for('tables_page') }}">Tables</a>
         {% if current_user.is_authenticated %}
@@ -24,16 +24,9 @@
             <a style = "float: right;" class="active" class="nav-link" href="{{ url_for('register_page') }}">Register</a>
         {% endif %}
     </div>
-    {% with messages = get_flashed_messages() %}  
-        {% if messages %}  
-            {% for message in messages %}  
-                <p>{{ message }}</p>  
-            {% endfor %}  
-        {% endif %}  
-    {% endwith %} 
     <div class="main-container">
-    <div class="register-container">
-        <div method="POST" class="form-register">
+      <div class="register-container">
+        <form method="POST" class="form-register">
 
             {{ form.hidden_tag() }}
 
@@ -58,7 +51,7 @@
                 <a class="form-btn-small" href = "{{ url_for('login_page')}}">Log In</a>
             </div>
         </form>
-    </div>
+      </div>
     </div>
 </body>
 </html>
