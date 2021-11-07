@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <style>
+
+body {
+  background-color: #2c3347;
+}
+
 .topnav {
   background-color: #333;
   overflow: hidden;
@@ -27,24 +32,82 @@
 }
 
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #366df7;
   color: white;
 }
+
+.header {
+  overflow: hidden;
+  background-color: #2c3347;
+  padding: 20px 10px;
+}
+
+.header a {
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #454f6b;
+  color: white;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+table{
+    border-collapse: collapse;
+    color: white;
+}
+
+th, td {
+  border: 1px solid white;
+}
+
 </style>
 <body>
-  <div class="topnav">
-    <a href="{{ url_for('home_page') }}">Cam</a>
-    <a class="active" href="{{ url_for('tables_page') }}">Tables</a>
+  <div class="header">
+    <a href="{{ url_for('home_page') }}" class="logo">Distraction Detecter</a>
   </div>
-{{url_viewtime}}
-<table>
-{% for key, value in url_viewtime.items() %}
-    <tr>
-        <th> {{ key }} </th>
-        <td> {{ value }} </td>
-    </tr>
-{% endfor %}
-</table>
+  
+  <div class="topnav">
+        <a style = "float: left;" class="active" href="{{ url_for('home_page') }}">Cam</a>
+        <a style = "float: left;" href="{{ url_for('tables_page') }}">Tables</a>
+        {% if current_user.is_authenticated %}
+            <a style = "float: right;" class="nav-link">Welcome, {{ current_user.username }}</a>
+            <a style = "float: right;"class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
+        {% else %}
+            <a style = "float: right;"class="nav-link" href="{{ url_for('login_page') }}">Login</a>
+            <a style = "float: right;"class="nav-link" href="{{ url_for('register_page') }}">Register</a>
+        {% endif %}
+    </div>
+
+    <table>
+        <th> Website </th>
+        <th> Seconds </th>
+        {% for key, value in url_viewtime.items() %}
+            <tr>
+                <th> {{ key }} </th>
+                <td> {{ value }} </td>
+        </tr>
+        {% endfor %}
+    </table>
 
 </body>
 
