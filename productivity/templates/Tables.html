@@ -26,29 +26,29 @@
     </div>
 
     <div class="block">
-        <div class = "tabl">
-        <a>These are the sights that you visited:</a>
+        <div class = "table">
+            <a class="body-header">Site Breakdown</a>
 
-        <table>
-            <th> Website </th>
-            <th> Seconds </th>
-            {% for key, value in url_viewtime.items() %}
-                <tr>
-                  <th> {{ key }} </th>
-                  <td> {{ value }} </td>
-             </tr>
-            {% endfor %}
-        </table>
+            <table>
+                <th> Website </th>
+                <th> Seconds </th>
+                {% for key, value in url_viewtime.items() %}
+                    <tr>
+                    <th> {{ key }} </th>
+                    <td> {{ value }} </td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
 
-        <div>
-        <a>These are the sights that you visited for the longest time:</a>
-        
-        <ul>
-            {% for x in websites %}
-                <li>{{x}}</li>
-            {% endfor %}
-        </ul>
+        <div class="table">
+            <a class="body-header">Longest-Visited Sites:</a>
+            
+            <ul>
+                {% for x in websites %}
+                    <li class="list">{{x}}</lic>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
