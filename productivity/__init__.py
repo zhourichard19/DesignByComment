@@ -5,8 +5,8 @@ from flask_login import LoginManager
 import os
 # initialize server
 current_directory = os.getcwd()
-statDir = current_directory+'./productivity/static/'
-templateDir = current_directory+'./productivity/templates/'
+statDir = current_directory+'/productivity/static/'
+templateDir = current_directory+'/productivity/templates/'
 
 app = Flask(__name__,static_folder=statDir,
             template_folder=templateDir)
