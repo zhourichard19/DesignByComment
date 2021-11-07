@@ -13,7 +13,8 @@ from tensorflow.keras.applications import *
 from tensorflow.keras.models import Model,load_model
 totalDistractionFrames = 0
 camera = cv2.VideoCapture(0)
-model = load_model('mobilenetv2_distraction2.h5')
+model = load_model('mobilenetv2_faceonly.h5')
+face_model = cv2.CascadeClassifier('lbpcascade_frontalface_improved.xml')
 def process_frames():
     temp = 0
     totalDistractionFrames = 0
@@ -22,25 +23,22 @@ def process_frames():
     if not success:
         return 1 
     else:
+        predictions = []
         totalFrames +=1
-        # print(frame.shape)
-        frame2 = cv2.resize(frame,(224,224))
-        frame2 = np.reshape(frame2,[1,224,224,3])
-        prediction = np.argmax(model.predict(frame2))
-        print(prediction)
-        # #potentially store rolling average of predictions instead
-        # if(prediction == 0):
-        #     temp+=1
-        # elif(temp>5):
-        #     totalDistractionFrames += temp
-        #     # session["TotalDistractionFrames"] = totalDistractionFrames
-        #     temp = 0
-        # else:
-            # temp = 0
-    # return {"distracted":totalDistractionFrames,"focussed":totalFrames}
-    return jsonify({"prediction":int(prediction)})
+        faces=face_model.detectMultiScale(frame)
+        for (x,y,w,h) in faces:
+            face_img=frame[y:y+w,x:x+w]
+            # print(frame.shape)
+            frame2 = cv2.resize(face_img,(224,224))
+            frame2 = np.reshape(frame2,[1,224,224,3])
+            prediction = np.argmax(model.predict(frame2))
+            predictions.append(prediction)
+        #potentially store rolling average of predictions instead
+        output = 1 if not len(faces) else max(predictions)
+    return jsonify({"prediction":int(output)})
 
 def gen_frames():
+    
     while True:
         success, frame = camera.read()  # read the camera frame
         if not success:
@@ -48,5 +46,6 @@ def gen_frames():
         else:
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
+            
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
