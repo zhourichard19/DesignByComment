@@ -59,7 +59,12 @@ def process_frames():
     temp = 0
     totalDistractionFrames = 0
     totalFrames = 0
-    success, frame = camera.read()  # read the camera frame
+    try:
+        success, frame = camera.read()  # read the camera frame
+    except(Exception):
+        print("webcam busy")
+        # read the camera frame
+        return 1
     if not success:
         return 1 
     else:
@@ -71,12 +76,18 @@ def process_frames():
         #potentially store rolling average of predictions instead
     return jsonify({"prediction":int(label)})
 
+
 def gen_frames():
     
     while True:
-        success, frame = camera.read()  # read the camera frame
-        if not success:
-            break
+        try:
+            success, frame = camera.read()  # read the camera frame
+        except(Exception):
+            print("webcam busy")
+            continue
+
+        # if not success:
+        #     break
         else:
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()

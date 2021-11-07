@@ -11,9 +11,6 @@ import time
 
 
 @app.route('/')
-def confirm_page():
-    return render_template('confirmPage.html')
-
 @app.route('/home', methods=['GET', 'POST'])
 def home_page():
     stop = CamStop()
