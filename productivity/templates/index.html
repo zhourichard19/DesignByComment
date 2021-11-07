@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <title>Document</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='index.css')}}"> -->
     <script src="jquery-3.5.1.min.js"></script>
@@ -126,7 +128,36 @@ button {
 
   width: 187px;
 }
+/* Pie charts consist of solid slices where you can use this selector to override the default style. */
+.ct-series-a .ct-slice-pie {
+  /* fill of the pie slieces */
+  fill: hsl(120, 40%, 60%);
+  /* give your pie slices some outline or separate them visually by using the background color here */
+  stroke: white;
+  /* outline width */
+  stroke-width: 4px;
+  padding: 10px;
+  cursor: move;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  max-width:200px;
+  max-height: 200px;
 
+  resize: both;
+  overflow: auto;
+}
+#chart1 {
+  padding: 10px;
+
+  bottom: 0;
+  right: 100;
+  z-index: 10;
+  max-width:600px;
+  max-height: 600px;
+  height: 400px;
+  width: 400px;
+}
 </style>
 
 <body>
@@ -194,6 +225,8 @@ button {
             <span class="time" id="display">00:00:00</span>
           </div>
         <!-- </div> -->
+        <div class="ct-chart ct-golden-section" class= "piChart" id="chart1"></div>
+        <script src="{{ url_for('static', filename='predictionLoop.js') }}"></script>
       </div>
           <!-- <h3 class="mt-5" style="color:red">ARE YOU STAYING ON TASK?!?!?!?</h3>
           <h3 class="prediction"></h3>
