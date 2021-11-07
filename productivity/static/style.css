@@ -87,7 +87,7 @@ li{
 
 .block{
     display: grid;
-    grid-template-columns: 300px 300px; 
+    grid-template-columns: auto auto; 
     grid-template-rows: 300px;
     grid-column-gap: 100px;
 }
@@ -212,4 +212,33 @@ li{
   
     border: 2px solid;
     border-radius: 50%;
+}
+
+.body-header {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+table {
+    margin: auto;
+}
+
+th, td {
+    margin: .5em;
+    text-align: center;
+    padding: 5px;
+}
+
+.table{
+    text-align: center;
+    margin: 3em;
+}
+
+.list {
+    text-align: center;
+    margin: 3em;
+    list-style-type: none;
+    font-size: large;
+    font-weight: bold;
 }

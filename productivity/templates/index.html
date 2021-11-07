@@ -10,7 +10,7 @@
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <title>Document</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='index.css')}}"> -->
-    <script src="jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
 #mydiv {
@@ -148,15 +148,16 @@ button {
   overflow: auto;
 }
 #chart1 {
-  padding: 10px;
-
+  padding: 20px 10px;
+  margin: auto;
+  margin-top: 20px;
   bottom: 0;
   right: 100;
   z-index: 10;
-  max-width:600px;
-  max-height: 600px;
-  height: 400px;
-  width: 400px;
+  max-width:270px;
+  max-height: 270px;
+  height:270px;
+  width: 270px;
 }
 </style>
 
@@ -225,7 +226,7 @@ button {
             <span class="time" id="display">00:00:00</span>
           </div>
         <!-- </div> -->
-        <div class="ct-chart ct-golden-section" class= "piChart" id="chart1"></div>
+        <div class="ct-chart ct-golden-section pie" class= "piChart" id="chart1"></div>
         <script src="{{ url_for('static', filename='predictionLoop.js') }}"></script>
       </div>
           <!-- <h3 class="mt-5" style="color:red">ARE YOU STAYING ON TASK?!?!?!?</h3>
@@ -243,7 +244,7 @@ button {
     />
   </head>
 
-    <script src="{{ url_for('static', filename='predictionLoop.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='predictionLoop.js') }}"></script> -->
 
       <script>
 

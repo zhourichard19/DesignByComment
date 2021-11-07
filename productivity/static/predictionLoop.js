@@ -39,4 +39,4 @@ var intervalID = setInterval(function(){
 
         $( ".prediction" ).html("Focussed: "+totalFocussed+", Distractions: "+totalDistractions);
       });
-}, 100);
+}, 200);
