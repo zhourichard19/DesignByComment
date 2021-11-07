@@ -4,6 +4,7 @@ from productivity.cam import camera, gen_frames,process_frames
 from productivity.forms import RegisterForm, LoginForm, CamStop
 from productivity.models import User
 from productivity.url_parse import url_strip
+from productivity.webWithMostHits import mostHits
 from flask_login import login_user, logout_user, login_required, current_user
 import time
 
@@ -124,4 +125,5 @@ def end_page():
 @app.route('/Tables')
 def tables_page():
     dic = {'url':6,'google.com':156,'gmail.com':2}
-    return render_template('Tables.html',url_viewtime=url_viewtime)
+    websites = mostHits(url_viewtime)
+    return render_template('Tables.html',url_viewtime=url_viewtime,websites=websites)

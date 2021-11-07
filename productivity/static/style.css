@@ -4,6 +4,10 @@
     font-family: sans-serif;
 }
 
+a{
+    color: white;
+}
+
 body {
     background-color: #2c3347;
 }
@@ -74,6 +78,14 @@ table{
 
 th, td {
   border: 1px solid white;
+}
+
+li{
+    color: white;
+}
+
+.list{
+    text-align: right;
 }
 
 .main-container {
