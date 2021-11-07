@@ -46,6 +46,9 @@ def gen_frames():
         else:
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
-            
+            faces=face_model.detectMultiScale(frame)
+            for (x,y,w,h) in faces:
+                cv2.rectangle(frame,(x,y),(x+w,y+h),"green",2)
+                # cv2.rectangle(frame,(x,y-40),(x+w,y),"green",-1)
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result

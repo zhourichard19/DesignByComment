@@ -1,6 +1,6 @@
 from productivity import app, db, url_timestamp, url_viewtime, prev_url
 from flask import render_template, Response, redirect, url_for, flash, jsonify, request
-from productivity.cam import camera, gen_frames,process_frames
+from productivity.cam import camera, gen_frames,process_frames,face_model
 from productivity.forms import RegisterForm, LoginForm, CamStop
 from productivity.models import User
 from productivity.url_parse import url_strip
