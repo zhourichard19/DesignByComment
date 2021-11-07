@@ -207,11 +207,14 @@ button {
                       <a href="{{ url_for('start_page') }}"></a>
                       <img id="pauseButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/pause-button_pinhpy.svg" />
                     </button>
-            
-                    <button class="buttonReset"><a href="{{ url_for('logout_page') }}"></a>
-                      <img id="resetButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/reset-button_mdv6wf.svg" />
-                      <a href="{{ url_for('logout_page') }}"></a>
-                    </button>
+
+                    <form method="POST">
+                      <input id="loop" name="loop" type="hidden" value="False">
+                      
+                      <button class="buttonReset" formmethod="POST">
+                        <img id="resetButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/reset-button_mdv6wf.svg" />
+                      </button>
+                    </form>
                   </div>
                   
                 <p id="counter"></p>
