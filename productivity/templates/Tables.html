@@ -12,7 +12,7 @@
   <div class="header">
     <a href="{{ url_for('home_page') }}" class="logo">Distraction Detecter</a>
   </div>
-  
+
   <div class="topnav">
         <a style = "float: left;" href="{{ url_for('home_page') }}">Cam</a>
         <a style = "float: left;" class="active" href="{{ url_for('tables_page') }}">Tables</a>
@@ -25,7 +25,11 @@
         {% endif %}
     </div>
 
-    <table>
+  <div class="header">
+    <a>These are the sights that you visited:</a>
+  </div>
+
+  <table>
         <th> Website </th>
         <th> Seconds </th>
         {% for key, value in url_viewtime.items() %}
@@ -34,7 +38,17 @@
                 <td> {{ value }} </td>
         </tr>
         {% endfor %}
-    </table>
+  </table>
+    
+    <div class = "list">
+        <a>These are the sights that you visited for the longest time:</a>
+        
+        <ul>
+            {% for x in websites %}
+                <li>{{x}}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
 </body>
 
