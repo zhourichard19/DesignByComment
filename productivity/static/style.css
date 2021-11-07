@@ -76,8 +76,16 @@ th, td {
   border: 1px solid white;
 }
 
+.main-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(bg.png);
+    background-size: cover;
+    height: 70vh;
+    background-position: 50% 50%;
+    padding: 3em;
+}
+
 .register-container {
-    margin: 2em auto;
+    margin: auto;
     padding: 1em;
     background-color: white;
     width: 30%;
@@ -125,9 +133,9 @@ th, td {
 }
 
 
-.form-btn:hover {
+/* .form-btn:hover {
     background-color: #638aed;
 }
 .form-btn-small:hover {
     background-color: #638aed;
-}
+} */

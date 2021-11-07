@@ -23,35 +23,34 @@
             <a style = "float: right;"class="nav-link" href="{{ url_for('register_page') }}">Register</a>
         {% endif %}
     </div>
+<div class="main-container">
+  <div class="register-container">
+      <!-- {% with messages = get_flashed_messages() %}  
+          {% if messages %}  
+              {% for message in messages %}  
+                  <p>{{ message }}</p>  
+              {% endfor %}  
+          {% endif %}  
+      {% endwith %}  -->
+      <form method="POST" class="form-signin">
+          {{ form.hidden_tag() }}
+          <h1>Please Login</h1>
+          <br>
 
-<div class="register-container">
-    {% with messages = get_flashed_messages() %}  
-        {% if messages %}  
-            {% for message in messages %}  
-                <p>{{ message }}</p>  
-            {% endfor %}  
-        {% endif %}  
-    {% endwith %} 
-    <form method="POST" class="form-signin">
-        {{ form.hidden_tag() }}
-        <h1>
-            Please Login
-        </h1>
-        <br>
+          <div>{{ form.username.label(class="form-text") }}</div>
+          <div>{{ form.username(class="form-box", placeholder="User Name") }}</div>
 
-        <div>{{ form.username.label(class="form-text") }}</div>
-        <div>{{ form.username(class="form-box", placeholder="User Name") }}</div>
+          <div>{{ form.password.label(class="form-text") }}</div>
+          <div>{{ form.password(class="form-box", placeholder="Password") }}</div>
 
-        <div>{{ form.password.label(class="form-text") }}</div>
-        <div>{{ form.password(class="form-box", placeholder="Password") }}</div>
+          <div>{{ form.submit(class="form-btn") }}</div>
 
-        <div>{{ form.submit(class="form-btn") }}</div>
-
-        <div class="form-text">
-          Don't have an account?
-          <a class="form-btn-small" href = "{{ url_for('login_page')}}">Register</a>
-      </div>
-    </form>
+          <div class="form-text">
+            Don't have an account?
+            <a class="form-btn-small" href = "{{ url_for('register_page')}}">Register</a>
+          </div>
+      </form>
+  </div>
 </div>
 </body>
 </html>
