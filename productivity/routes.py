@@ -1,17 +1,23 @@
 from productivity import app, db, url_timestamp, url_viewtime, prev_url
 from flask import render_template, Response, redirect, url_for, flash, jsonify, request
 from productivity.cam import camera, gen_frames
-from productivity.forms import RegisterForm, LoginForm
+from productivity.forms import RegisterForm, LoginForm, CamStop
 from productivity.models import User
 from productivity.url_parse import url_strip
 from flask_login import login_user, logout_user, login_required, current_user
 import time
 
-@app.route('/')
-@app.route('/home')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home_page():
-    return render_template('index.html')
-
+    stop = CamStop();
+    if request.method == 'POST':
+        loop = request.form.get('loop')
+        if loop == "False":
+            camera.release()
+        return redirect(url_for('home_page'))
+    else:
+        return render_template('index.html', stop=stop)
 
 @app.route('/video_feed')
 def video_feed():
