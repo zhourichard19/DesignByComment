@@ -9,7 +9,7 @@ body {
 }
   
 .topnav {
-    background-color: #333;
+    background-color: rgb(29, 29, 29);
     overflow: hidden;
 }
   
@@ -74,4 +74,60 @@ table{
 
 th, td {
   border: 1px solid white;
+}
+
+.register-container {
+    margin: 2em auto;
+    padding: 1em;
+    background-color: white;
+    width: 30%;
+    border-radius: 2%;
+    box-shadow: 5px 5px #000000;
+}
+
+.form-title {
+    text-align: center;
+}
+
+.form-box {
+    width: 100%;
+    margin: .25em 0 1em;
+}
+
+.form-text {
+    font-weight: bold;
+}
+
+.form-btn {
+    margin: auto;
+    margin-bottom: .5em;
+    width: 40%;
+    height: 2em;
+    background-color: #366df7;
+    color: white;
+    border: 0;
+    border-radius: .25em;
+    box-shadow: 2px 2px #2c3347;
+    font-size: large;
+}
+
+.form-btn-small {
+    text-decoration: none;
+    margin: auto;
+    width: auto;
+    padding: .25em;
+    background-color: #366df7;
+    color: white;
+    border: 0;
+    border-radius: .25em;
+    box-shadow: 2px 2px #2c3347;
+    font-weight: normal;
+}
+
+
+.form-btn:hover {
+    background-color: #638aed;
+}
+.form-btn-small:hover {
+    background-color: #638aed;
 }
