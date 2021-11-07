@@ -8,6 +8,9 @@ from flask_login import login_user, logout_user, login_required, current_user
 import time
 
 @app.route('/')
+def confirm_page():
+    return render_template('confirmPage.html')
+
 @app.route('/home')
 def home_page():
     return render_template('index.html')

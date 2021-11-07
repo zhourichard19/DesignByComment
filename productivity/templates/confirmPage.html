@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Document</title>
+</head>
+<style>
+.Block {
+    float:center;
+    padding-top: 200px;
+}
+.question {
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 40px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+.Options {
+    text-align : center;
+    padding: 40px;
+    font-size: 75px;
+}
+</style>
+
+<body>
+    <div class = "Block">
+        <div class="question">
+            <a class="logo">Do you want to launch the Distraction Detector applciation?</a>
+        </div>
+
+        <div class="Options">
+            <a class="form-btn-small" href = "{{ url_for('home_page')}}">YES</a>
+            <a class="form-btn-small" href = "{{ url_for('home_page')}}">NO</a>
+        </div>
+    </div>
+</body>
+
+</html>
