@@ -1,16 +1,21 @@
 from productivity import app, db, url_timestamp, url_viewtime, prev_url
-from flask import render_template, Response, redirect, url_for, flash, jsonify, request
-from productivity.cam import camera, gen_frames
+from flask import render_template, Response, redirect, url_for, flash, jsonify, request, session
+from productivity.cam import camera,model,totalDistractionFrames,gen_frames,process_frames
 from productivity.forms import RegisterForm, LoginForm
 from productivity.models import User
 from productivity.url_parse import url_strip
 from flask_login import login_user, logout_user, login_required, current_user
 import time
 
+
 @app.route('/')
 @app.route('/home')
 def home_page():
     return render_template('index.html')
+
+@app.route('/distractionCount')
+def distractionCount():
+    return process_frames()
 
 @app.route('/video_feed')
 def video_feed():
@@ -98,6 +103,7 @@ def start_page():
     url_viewtime = {}
     prev_url = ""
     return redirect(url_for('home_page'))
+
 
 @app.route('/end')
 def end_page():
