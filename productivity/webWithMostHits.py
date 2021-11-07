@@ -1,12 +1,13 @@
 def mostHits(webDict):
     websites = []
+    temp = webDict
     if len(webDict) > 3:
         for x in range(3):
-            maxKey = max(webDict,key=webDict.get)
+            maxKey = max(temp,key=temp.get)
             websites.append(maxKey)
-            del webDict[maxKey]
+            del temp[maxKey]
     else:
-        for y in webDict:
+        for y in temp:
             websites.append(y)
     print(websites)
     return websites

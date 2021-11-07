@@ -2,9 +2,14 @@ from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-
+import os
 # initialize server
-app = Flask(__name__)
+current_directory = os.getcwd()
+statDir = current_directory+'./productivity/static/'
+templateDir = current_directory+'./productivity/templates/'
+
+app = Flask(__name__,static_folder=statDir,
+            template_folder=templateDir)
 
 # Initialize database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
