@@ -84,8 +84,12 @@ li{
     color: white;
 }
 
-.list{
-    text-align: right;
+
+.block{
+    display: grid;
+    grid-template-columns: 300px 300px; 
+    grid-template-rows: 300px;
+    grid-column-gap: 100px;
 }
 
 .main-container {

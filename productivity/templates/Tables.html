@@ -25,22 +25,23 @@
         {% endif %}
     </div>
 
-  <div class="header">
-    <a>These are the sights that you visited:</a>
-  </div>
+    <div class="block">
+        <div class = "tabl">
+        <a>These are the sights that you visited:</a>
 
-  <table>
-        <th> Website </th>
-        <th> Seconds </th>
-        {% for key, value in url_viewtime.items() %}
-            <tr>
-                <th> {{ key }} </th>
-                <td> {{ value }} </td>
-        </tr>
-        {% endfor %}
-  </table>
-    
-    <div class = "list">
+        <table>
+            <th> Website </th>
+            <th> Seconds </th>
+            {% for key, value in url_viewtime.items() %}
+                <tr>
+                  <th> {{ key }} </th>
+                  <td> {{ value }} </td>
+             </tr>
+            {% endfor %}
+        </table>
+        </div>
+
+        <div>
         <a>These are the sights that you visited for the longest time:</a>
         
         <ul>
@@ -48,6 +49,7 @@
                 <li>{{x}}</li>
             {% endfor %}
         </ul>
+        </div>
     </div>
 
 </body>

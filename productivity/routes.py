@@ -5,6 +5,7 @@ from productivity.forms import RegisterForm, LoginForm, CamStop
 from productivity.models import User
 from productivity.url_parse import url_strip
 from productivity.webWithMostHits import mostHits
+from productivity.cleanViewDict import editViewTimes
 from flask_login import login_user, logout_user, login_required, current_user
 import time
 
@@ -118,12 +119,10 @@ def start_page():
 
 @app.route('/end')
 def end_page():
-    
     return redirect(url_for('home_page'))
 
 
 @app.route('/Tables')
 def tables_page():
     dic = {'url':6,'google.com':156,'gmail.com':2}
-    websites = mostHits(url_viewtime)
-    return render_template('Tables.html',url_viewtime=url_viewtime,websites=websites)
+    return render_template('Tables.html',url_viewtime=url_viewtime,websites=mostHits(url_viewtime.copy()))
