@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
 </head>
@@ -64,14 +65,165 @@ body {
   color: white;
 }
 
+<<<<<<< HEAD
 .header {
   overflow: hidden;
   background-color: #fff;
   padding: 20px 10px;
 }
+=======
+    #mydiv {
+      position: absolute;
+      z-index: 9;
+      background-color: #f1f1f1;
+      text-align: center;
+      resize: both;
+      overflow: auto;
+      border: 1px solid #d3d3d3;
+    }
+
+    #clockOther {
+      padding: 10px;
+      cursor: move;
+      z-index: 10;
+      
+      
+      resize: both;
+      overflow: auto;
+    }
+
+    #clock{
+        position: absolute;
+        z-index: 9;
+        text-align: center;
+        resize: both;
+        overflow: auto;
+       
+    }
+
+    .box {
+            background-color: coral;
+            height: 200px;
+            width: 200px;
+    }
+>>>>>>> frontEnd
 
 .header a {
   color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+    #mydivheader {
+      padding: 10px;
+      cursor: move;
+      z-index: 10;
+      
+      color: #fff;
+      resize: both;
+      overflow: auto;
+    }
+
+.stopwatch {
+  display: grid;
+  resize: both;
+  overflow: auto;
+  justify-items: center;
+  grid-row-gap: 23px;
+  width: 50%;
+  padding-top: 25px;
+}
+
+.circle {
+  display: flex;
+  resize: both;
+  justify-content: center;
+  align-items: center;
+
+  height: 270px;
+  width: 270px;
+
+  border: 2px solid;
+  border-radius: 50%;
+}
+
+.time {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 300;
+  font-size: 48px;
+}
+
+.gold {
+  font-weight: 900;
+
+  color: #f2c94c;
+  text-shadow: 0 0 0px #fff, 0 0 50px #f2c94c;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+
+  width: 187px;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  border: none;
+  margin: 0;
+  outline: none;
+}
+
+#playButton {
+  display: block;
+}
+
+#pauseButton {
+  display: none;
+}
+
+body {
+  background-color: #2c3347;
+}
+
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #366df7;
+  color: white;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #2c3347;
+  padding: 20px 10px;
+}
+
+.header a {
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -86,8 +238,8 @@ body {
 }
 
 .header a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #454f6b;
+  color: white;
 }
 
 .header a.active {
@@ -100,6 +252,7 @@ body {
 }
 
 </style>
+
 <body>
   <div class="header">
     <a href="{{ url_for('home_page') }}" class="logo">Distraction Detecter</a>
@@ -124,23 +277,82 @@ body {
     </div>    -->
     <!--<div class= "mydivheader" id="container" style="width: 100%; height: 100%"></div>-->
     
+    <!--<div class= "mydivheader" id="container" style="width: 100%; height: 100%"></div>-->
+   
     
     <div id="mydiv" class="container">
         
         <div class="row" id="mydivheader">
             <div id="mydivheader" class="col-lg-8  offset-lg-2">
+                
                 <h3 class="mt-5" style="color:red">ARE YOU STAYING ON TASK?!?!?!?</h3>
                 <img class="invis" src="{{ url_for('video_feed') }}" width="100%">
-                <button id="buttonShift"><a href="{{ url_for('start_page') }}">Start</a></button>
+                <div id="time" style="color:rgb(25, 158, 235)" text-align: center;font-size: 2em; margin-bottom: 10px">00:00</div>
+                
+                <button onClick="myTimer = setInterval(myCounter, 1000)" id="buttonShift"><a href="{{ url_for('start_page') }}">Start</a></button>
                 <button id="buttonShift"><a href="{{ url_for('logout_page') }}">Stop</a></button>
+                <p id="counter"></p>
+                <div id ="app" v-cloak >
+                    <hr />
+                    <button @click="toggleBox">Show Cam</button>
+                    <div v-if="isVisable" class="invis"></div>
+                </div> 
             </div>
-        </div>
+        </div> 
     </div>
 
 
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;1,300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
+  <body>
+    <div id="clock" class="stopwatch">
+      <div id = "clockOther" class="circle">
+        <span class="time" id="display">00:00:00</span>
+      </div>
 
+      <div class="controls">
+        <button class="buttonPlay">
+          <img id="playButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/play-button_opkxmt.svg" />
+
+          <img id="pauseButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/pause-button_pinhpy.svg" />
+        </button>
+
+        <button class="buttonReset">
+          <img id="resetButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/reset-button_mdv6wf.svg" />
+        </button>
+      </div>
+    </div>
+    
+    </body>
+
+    <!--<audio controls loop>
+        <source src="Awake.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>-->
+    
     <script>
+        var userPreference;
+
+       if (confirm("Do you not want to be productive? Unfortunate...") == true) {
+           window.open("https://www.youtube.com/watch?v=a3Z7zEc7AXQ", 'newwin');
+       }
+
+       
+
+   </script>
+
+    
+      <script>
+
         //Make the DIV element draggagle:
         dragElement(document.getElementById("mydiv"));
 
@@ -184,6 +396,18 @@ body {
                 document.onmousemove = null;
             }
         }
+
+
+        window.addEventListener("load", function() {
+            const clock = document.getElementById("time");
+            let time = -1, intervalId;
+            function incrementTime() {
+                time++;
+                clock.textContent =("0" + Math.trunc(time / 60)).slice(-2) +":" + ("0" + (time % 60)).slice(-2);
+            }
+            incrementTime();
+            intervalId = setInterval(incrementTime, 1000);
+        });
     </script>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -199,10 +423,43 @@ body {
             methods: {
                 toggleBox() {
                     this.isVisable = !this.isVisable
+                    console.log("WE GOOD");
                 }
 
             }
         })
+        app.component('invisible',{//Component example
+                template:`
+                <div id="mydiv" class="container">
+        
+        <div class="row" id="mydivheader">
+            <div id="mydivheader" class="col-lg-8  offset-lg-2">
+                <h3 class="mt-5" style="color:red">ARE YOU STAYING ON TASK?!?!?!?</h3>
+                <img class="invis" src="{{ url_for('video_feed') }}" width="100%">
+                <button id="buttonShift"><a href="{{ url_for('start_page') }}">Start</a></button>
+                <button id="buttonShift"><a href="{{ url_for('logout_page') }}">Stop</a></button>
+                <div id ="app" v-cloak >
+                    <hr />
+                    <button @click="toggleBox">Show Cam</button>
+                    <div v-if="isVisable" class="invis"></div>
+                </div> 
+            </div>
+        </div>
+    </div>
+                `,
+                data(){
+                    return{
+                        isVisable: false
+                    }
+                },
+                methods:{
+                    toggleBox() {
+                        this.isVisable = !this.isVisable
+                        console.log("WE GOOD");
+                    }
+                }
+
+            })
 
 
 
@@ -238,6 +495,83 @@ body {
          //   chart.draw();
 
        // });
+    </script>
+
+    <script>
+        // Convert time to a format of hours, minutes, seconds, and milliseconds
+
+function timeToString(time) {
+  let diffInHrs = time / 3600000;
+  let hh = Math.floor(diffInHrs);
+
+  let diffInMin = (diffInHrs - hh) * 60;
+  let mm = Math.floor(diffInMin);
+
+  let diffInSec = (diffInMin - mm) * 60;
+  let ss = Math.floor(diffInSec);
+
+  let diffInMs = (diffInSec - ss) * 100;
+  let ms = Math.floor(diffInMs);
+
+  let formattedMM = mm.toString().padStart(2, "0");
+  let formattedSS = ss.toString().padStart(2, "0");
+  let formattedMS = ms.toString().padStart(2, "0");
+
+  return `${formattedMM}:${formattedSS}:${formattedMS}`;
+}
+
+// Declare variables to use in our functions below
+
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
+
+// Create function to modify innerHTML
+
+function print(txt) {
+  document.getElementById("display").innerHTML = txt;
+}
+
+// Create "start", "pause" and "reset" functions
+
+function start() {
+  startTime = Date.now() - elapsedTime;
+  timerInterval = setInterval(function printTime() {
+    elapsedTime = Date.now() - startTime;
+    print(timeToString(elapsedTime));
+  }, 10);
+  showButton("PAUSE");
+}
+
+function pause() {
+  clearInterval(timerInterval);
+  showButton("PLAY");
+}
+
+function reset() {
+  clearInterval(timerInterval);
+  print("00:00:00");
+  elapsedTime = 0;
+  showButton("PLAY");
+}
+
+// Create function to display buttons
+
+function showButton(buttonKey) {
+  const buttonToShow = buttonKey === "PLAY" ? playButton : pauseButton;
+  const buttonToHide = buttonKey === "PLAY" ? pauseButton : playButton;
+  buttonToShow.style.display = "block";
+  buttonToHide.style.display = "none";
+}
+// Create event listeners
+
+let playButton = document.getElementById("playButton");
+let pauseButton = document.getElementById("pauseButton");
+let resetButton = document.getElementById("resetButton");
+
+playButton.addEventListener("click", start);
+pauseButton.addEventListener("click", pause);
+resetButton.addEventListener("click", reset);
     </script>
 </body>
 </html>
