@@ -13,7 +13,7 @@
     <a href="{{ url_for('home_page') }}" class="logo">Distraction Detecter</a>
   </div>
   
-  <div class="topnav">
+    <div class="topnav">
         <a style = "float: left;" href="{{ url_for('home_page') }}">Cam</a>
         <a style = "float: left;" href="{{ url_for('tables_page') }}">Tables</a>
         {% if current_user.is_authenticated %}
@@ -24,42 +24,34 @@
             <a style = "float: right;" class="active" class="nav-link" href="{{ url_for('register_page') }}">Register</a>
         {% endif %}
     </div>
-    {% with messages = get_flashed_messages() %}  
-        {% if messages %}  
-            {% for message in messages %}  
-                <p>{{ message }}</p>  
-            {% endfor %}  
-        {% endif %}  
-    {% endwith %} 
-    <div class="container">
+    <div class="main-container">
+      <div class="register-container">
         <form method="POST" class="form-register">
 
             {{ form.hidden_tag() }}
 
-            <h1>
-                Please Create your Account
-            </h1>
+            <h1 class="form-title">Please Create Your Account</h1>
             <br>
-            {{ form.username.label() }}
-            {{ form.username(class="", placeholder="User Name") }}
+            <div>{{ form.username.label(class="form-text") }}</div>
+            <div>{{ form.username(class="form-box", placeholder="User Name") }}</div>
 
-            {{ form.email_address.label() }}
-            {{ form.email_address(class="", placeholder="Email Address") }}
+            <div>{{ form.email_address.label(class="form-text") }}</div>
+            <div>{{ form.email_address(class="form-box", placeholder="Email Address") }}</div>
 
-            {{ form.password1.label() }}
-            {{ form.password1(class="form-control", placeholder="Password") }}
+            <div>{{ form.password1.label(class="form-text") }}</div>
+            <div>{{ form.password1(class="form-box", placeholder="Password") }}</div>
 
-            {{ form.password2.label() }}
-            {{ form.password2(class="form-control", placeholder="Confirm Password") }}
+            <div>{{ form.password2.label(class="form-text") }}</div>
+            <div>{{ form.password2(class="form-box", placeholder="Confirm Password") }}</div>
+            
+            <div>{{ form.submit(class="form-btn") }}</div>
 
-            <br>
-
-            <div>
-                <a style = "color: white;" href = "{{ url_for('login_page')}}"> Already have an account?</a>
-             </div>
-
-            {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+            <div class="form-text">
+                Already have an account?
+                <a class="form-btn-small" href = "{{ url_for('login_page')}}">Log In</a>
+            </div>
         </form>
+      </div>
     </div>
 </body>
 </html>

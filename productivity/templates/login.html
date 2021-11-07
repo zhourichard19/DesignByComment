@@ -23,37 +23,34 @@
             <a style = "float: right;"class="nav-link" href="{{ url_for('register_page') }}">Register</a>
         {% endif %}
     </div>
+<div class="main-container">
+  <div class="register-container">
+      <!-- {% with messages = get_flashed_messages() %}  
+          {% if messages %}  
+              {% for message in messages %}  
+                  <p>{{ message }}</p>  
+              {% endfor %}  
+          {% endif %}  
+      {% endwith %}  -->
+      <form method="POST" class="form-signin">
+          {{ form.hidden_tag() }}
+          <h1>Please Login</h1>
+          <br>
 
-<div class="container">
-    {% with messages = get_flashed_messages() %}  
-        {% if messages %}  
-            {% for message in messages %}  
-                <p>{{ message }}</p>  
-            {% endfor %}  
-        {% endif %}  
-    {% endwith %} 
-    <form method="POST" class="form-signin">
-        {{ form.hidden_tag() }}
-        <h1>
-            Please Login
-        </h1>
-        <br>
+          <div>{{ form.username.label(class="form-text") }}</div>
+          <div>{{ form.username(class="form-box", placeholder="User Name") }}</div>
 
-        {{ form.username.label() }}
-        {{ form.username(class="form-control", placeholder="User Name") }}
+          <div>{{ form.password.label(class="form-text") }}</div>
+          <div>{{ form.password(class="form-box", placeholder="Password") }}</div>
 
-        {{ form.password.label() }}
-        {{ form.password(class="form-control", placeholder="Password") }}
+          <div>{{ form.submit(class="form-btn") }}</div>
 
-        <br>
-
-        <div>
-           <a style = "color: white;" href = "{{ url_for('register_page') }}">Do not have an account?</a>
-        </div>
-
-        {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
-
-    </form>
+          <div class="form-text">
+            Don't have an account?
+            <a class="form-btn-small" href = "{{ url_for('register_page')}}">Register</a>
+          </div>
+      </form>
+  </div>
 </div>
 </body>
 </html>

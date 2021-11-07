@@ -14,103 +14,69 @@
 #mydiv {
   position: absolute;
   z-index: 9;
-  background-color: #f1f1f1;
+  max-width: 700px;
+  max-height: 700px;
+  bottom: 0;
+  right: 0;
+  
   text-align: center;
   resize: both;
   overflow: auto;
-  border: 1px solid #d3d3d3;
+  
 }
-.box {
-  background-color: black;
-  border-style: solide;
-  height: 200px;
-  width: 200px;
-}
-
-
 
 #mydivheader {
   padding: 10px;
   cursor: move;
+  bottom: 0;
+  right: 0;
   z-index: 10;
+  max-width: 700px;
+  max-height: 700px;
   
-  color: #fff;
   resize: both;
   overflow: auto;
 }
 
-body {
-  background-color: #fff;
+#clockOther {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  
+  
+  
+  overflow: auto;
 }
 
-.topnav {
-  background-color: #333;
-  overflow: hidden;
+div {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
 }
 
-.topnav a {
-  float: left;
-  color: #f2f2f2;
+
+div::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+#clock{
+  position: absolute;
+  z-index: 9;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+  
+  overflow: auto;
 }
 
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+.box {
+  background-color: coral;
+  height: 200px;
+  width: 200px;
 }
 
-.topnav a.active {
-  background-color: #366df7;
-  color: white;
+body {
+  background-color: #2c3347;
+  color: #ffffff;
 }
-
-    #mydiv {
-      position: absolute;
-      z-index: 9;
-      background-color: #f1f1f1;
-      text-align: center;
-      resize: both;
-      overflow: auto;
-      border: 1px solid #d3d3d3;
-    }
-
-    #clockOther {
-      padding: 10px;
-      cursor: move;
-      z-index: 10;
-      
-      
-      resize: both;
-      overflow: auto;
-    }
-
-    #clock{
-        position: absolute;
-        z-index: 9;
-        text-align: center;
-        resize: both;
-        overflow: auto;
-       
-    }
-
-    .box {
-            background-color: coral;
-            height: 200px;
-            width: 200px;
-    }
-
-    #mydivheader {
-      padding: 10px;
-      cursor: move;
-      z-index: 10;
-      
-      color: #fff;
-      resize: both;
-      overflow: auto;
-    }
 
 .stopwatch {
   display: grid;
@@ -120,6 +86,18 @@ body {
   grid-row-gap: 23px;
   width: 50%;
   padding-top: 25px;
+}
+
+h1 {
+  font-size: 48px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+
+  text-align: center;
+  line-height: 59px;
+
+  padding: 0 64px;
+  margin: 0;
 }
 
 .circle {
@@ -148,13 +126,6 @@ body {
   text-shadow: 0 0 0px #fff, 0 0 50px #f2c94c;
 }
 
-.controls {
-  display: flex;
-  justify-content: space-between;
-
-  width: 187px;
-}
-
 button {
   cursor: pointer;
   background: transparent;
@@ -162,6 +133,7 @@ button {
   border: none;
   margin: 0;
   outline: none;
+  
 }
 
 #playButton {
@@ -170,6 +142,37 @@ button {
 
 #pauseButton {
   display: none;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+
+  width: 187px;
+}
+
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #366df7;
+  color: white;
 }
 </style>
 
@@ -190,17 +193,7 @@ button {
         {% endif %}
     </div>
 
-    <!--<div id ="app" v-cloak >
-        <hr />
-        <button @click="toggleBox">Show Cam</button>
-            <div v-if="isVisable" class="invis"></div>
-    </div>    -->
-    <!--<div class= "mydivheader" id="container" style="width: 100%; height: 100%"></div>-->
-    
-    <!--<div class= "mydivheader" id="container" style="width: 100%; height: 100%"></div>-->
-   
-    
-    <div id="mydiv" class="container">
+  <div class="container" id="mydiv">
         
         <div class="row" id="mydivheader">
             <div id="mydivheader" class="col-lg-8  offset-lg-2">
@@ -210,8 +203,22 @@ button {
                 <img class="invis" src="{{ url_for('video_feed') }}" width="100%">
                 <div id="time" style="color:rgb(25, 158, 235)" text-align: center;font-size: 2em; margin-bottom: 10px">00:00</div>
                 
-                <button onClick="myTimer = setInterval(myCounter, 1000)" id="buttonShift"><a href="{{ url_for('start_page') }}">Start</a></button>
-                <button id="buttonShift"><a href="{{ url_for('logout_page') }}">Stop</a></button>
+                <div class="controls">
+                    <button class="buttonPlay">
+                      <img id="playButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/play-button_opkxmt.svg" />
+                      <a href="{{ url_for('start_page') }}"></a>
+                      <img id="pauseButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/pause-button_pinhpy.svg" />
+                    </button>
+
+                    <form method="POST">
+                      <input id="loop" name="loop" type="hidden" value="False">
+                      
+                      <button class="buttonReset" formmethod="POST">
+                        <img id="resetButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/reset-button_mdv6wf.svg" />
+                      </button>
+                    </form>
+                  </div>
+                  
                 <p id="counter"></p>
                 <div id ="app" v-cloak >
                     <hr />
@@ -221,7 +228,6 @@ button {
             </div>
         </div> 
     </div>
-
 
     <link rel="stylesheet" href="style.css" />
     <link
@@ -238,18 +244,6 @@ button {
     <div id="clock" class="stopwatch">
       <div id = "clockOther" class="circle">
         <span class="time" id="display">00:00:00</span>
-      </div>
-
-      <div class="controls">
-        <button class="buttonPlay">
-          <img id="playButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/play-button_opkxmt.svg" />
-
-          <img id="pauseButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/pause-button_pinhpy.svg" />
-        </button>
-
-        <button class="buttonReset">
-          <img id="resetButton" src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/reset-button_mdv6wf.svg" />
-        </button>
       </div>
     </div>
     
